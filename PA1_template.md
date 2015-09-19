@@ -309,6 +309,22 @@ avgstepswday<-aggregate(steps~interval, data=predata[predata$type=='weekday',c('
 
 avgstepswend<-aggregate(steps~interval, data=predata[predata$type=='weekend',c('steps','interval')], mean)
 
+library(lattice)
+avgstepswk<-aggregate(steps~interval+type, data=predata[,c('steps','interval','type')], mean)
+
+
+xyplot(steps~interval|type,data=avgstepswk, type='l', layout=c(1,2))
+```
+
+![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.png) 
+
+```r
+xyplot(steps~interval|type,data=avgstepswk, type='l', layout=c(2,1))
+```
+
+![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-2.png) 
+
+```r
 split.screen(c(2, 1))
 ```
 
@@ -323,7 +339,7 @@ screen(2)
 plot(f,avgstepswend$steps, ylab="Avg Steps in 5 min Interval", xlab ="Week End Dayily Acitivities",type ='l')
 ```
 
-![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.png) 
+![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-3.png) 
 
 ```r
 close.screen(all = TRUE)
