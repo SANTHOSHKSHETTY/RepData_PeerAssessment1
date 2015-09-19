@@ -4,6 +4,8 @@ author: "Santhosh K Shetty"
 date: "September 18, 2015"
 output: html_document
 ---
+
+
 RMarkdown File Name: PA1_template.Rmd  
   
 This is an R Markdown document to demonstrate the R Markdown functionality and solution to peer assignment 1. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents.  
@@ -13,7 +15,7 @@ This is part of the reproducible research assignment #1
 Below is the  data for assignment   
 Data Set: [Activity Monitoring Data](https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip)
 
-##Loading and pre-processing the data  
+## Loading and pre-processing the data  
 Variables:-
 
 - Steps
@@ -53,7 +55,7 @@ predata<-merge(predata,map, all.x=TRUE)
 
 ```
 
-##What is mean total number of steps taken per day?
+## What is mean total number of steps taken per day?
 
 ```{r, echo=TRUE}
 
@@ -131,7 +133,7 @@ avgsteps[avgsteps$steps==max(avgsteps$steps),1]
 
 
 ```
-##Imputing missing values
+## Imputing missing values
 
 ```{r echo=TRUE}
 
@@ -201,8 +203,7 @@ sum(daytotalstepsnew$steps)-sum(daytotalsteps$steps)
 
 
 ```
-
-##Are there differences in activity patterns between weekdays and weekends?
+## Are there differences in activity patterns between weekdays and weekends?
 
 
 
@@ -223,7 +224,8 @@ avgstepswday<-aggregate(steps~interval, data=predata[predata$type=='weekday',c('
 
 avgstepswend<-aggregate(steps~interval, data=predata[predata$type=='weekend',c('steps','interval')], mean)
 
-library(lattice)
+require(lattice)
+
 avgstepswk<-aggregate(steps~interval+type, data=predata[,c('steps','interval','type')], mean)
 
 
@@ -243,5 +245,3 @@ close.screen(all = TRUE)
 
 
 ```
-
-
